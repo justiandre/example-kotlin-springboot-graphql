@@ -80,7 +80,7 @@ Localmente o projeto pode ser configurado nas ide’s [IntelliJ](https://www.jet
 # Execução do build
 ./gradlew build
 # Execução da aplicação
-java -jar  build/libs/exemplo.kotlin.paineltarefas-0.0.1-SNAPSHOT.jar
+java -jar  build/libs/example-kotlin-springboot-graphql-0.0.1-SNAPSHOT
 ```
 
 **OBS:** Com esses comandos a aplicação será iniciada, na porta 8080, mas isso pode ser alterado, informando o parâmetro: `-Dserver.port=$PORTA_DESEJADA`.
@@ -109,32 +109,23 @@ docker run -d -p 8080:8080 justiandre/example-kotlin-springboot-graphql:master
 
 | Arquivo ou diretório  |  Descrição |
 | ------------ | ------------ |
-| gradle/*, settings.gradle, gradlew.sh, gradlew.bat | Arquivos e diretórios de instalação do Gradle, com eles no projeto, não é necessário instalar o Gradle separadamente |
-|  build.gradle | Arquivo com as configurações de build do Gradle |
-| Dockerfile | Arquivo com as configurações para criação da imagem Docker, nesse Dockerfile é utilizado a estratégia multi-stage builds |
-| .travis.yml  | Arquivo com as configurações de build contínuo, no caso desse projeto possui as configurações de build, testes e push da imagem Docker para o DockerHub |
-| src/main/ | Diretório com os fonts Kotlin da aplicação |
-| src/main/**/endpoint/ | Diretório com os fonts referentes aos endpoints da aplicação |
-| src/main/**/endpoint/TarefaEndpoint.kt | Endpoint da entidade Tarefa |
-| src/main/**/configuration/ | Diretório com os fonts referentes a configuração da aplicação |
-| src/main/**/configuration/SwaggerConfig.kt | Configuração de geração automática da documentação em Swagger |
-| src/main/**/service/ | Diretório com os fonts referentes aos serviços da aplicação |
-| src/main/**/service/TarefaService.kt | Serviço da entidade Tarefa |
-| src/main/**/repository/api/ | Diretório com os fonts referentes aos repositórios da aplicação |
-| src/main/**/repository/api/TarefaRepository.kt | Repositório da entidade Tarefa |
-| src/main/**/ApplicationStart.kt | Classe responsável pela inicialização da aplicação |
-| src/main/**/entity/ | Diretório com os fonts referentes às entidades da aplicação |
-| src/main/**/entity/Tarefa.kt | Entidade de Tarefa |
-| src/main/resources | Diretório com as configurações da aplicação |
-| src/main/resources/application.yml | Arquivo de configuração do Spring Boot |
-| src/test/ | Diretório com os fonts de teste da aplicação |
-| src/test/**/it | Diretório com os fonts de teste de integração da aplicação |
-| src/test/**/it/TarefaIT.kt | Classe com os testes de integração do serviço de tarefa |
-| src/test/**/base/ | Diretório para criação das coisas reutilizáveis da camada de teste |
-| src/test/**/base/GeradorDados.kt | Classe responsável pela geração de dados randômicos para teste |
-| src/test/**/base/ApplicationBaseIT.kt | Classe base das classes de teste de integração |
-| src/test/**/sdk/ | Pacote com os sdks de acesso aos serviços da aplicação |
-| src/test/**/sdk/TarefaSdk.kt | Sdk de acesso aos serviços de tarefa |
+| .travis.yml | Arquivo com as configurações de build contínuo, no caso desse projeto possui as configurações de build, testes e push da imagem Docker para o DockerHub | 
+| Dockerfile | Arquivo com as configurações para criação da imagem Docker | 
+| gradle/*, settings.gradle, gradlew.sh, gradlew.bat | Arquivos e diretórios de instalação do Gradle, com eles no projeto, não é necessário instalar o Gradle separadamente | 
+| src/main/kotlin | Diretório com os fonts Kotlin da aplicação | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/Application.kt | Classe responsável pela inicialização da aplicação | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/domain/controller/graphql/config | Pacote com as classes com as configurações referentes ao graphql como tratamento de exceptions | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/domain/controller/graphql/resolver | Pacote com as classes com os resolvers (endpoints) do graphql, tanto as de querys quanto as de mutação | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/domain/entity | Pacote com as entidades de mapeamento JPA | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/domain/repository | Pacote com as classes de acesso aos dados externos a aplicação | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/domain/service | Pacote com as classes de regra de negocio do sistema | 
+| src/main/kotlin/tech/justi/example/kotlin/springboot/graphql/infrastructure | O intuito desse pacote é manter as classes responsáveis pela infraestrutura da aplicação ou classes utilitárias, o fato é que esse pacote não deveria existir, o tal código visto aqui, deveria estar em componentes isolados fora da aplicação, podendo ser reaproveitado também em outras aplicações e fazendo um isolamento do codigo de negócio do codigo de infraestrutura ou utilitários. | 
+| src/main/resources | Diretório com as configurações do sistema | 
+| src/main/resources/application.yml | Arquivo de configuração do Spring Boot | 
+| src/main/resources/banner.txt | Banner customizado do Spring Boot | 
+| src/main/resources/db/changelog | Diretório com os arquivos de versionamento do banco de dados | 
+| src/main/resources/graphql | Diretório com as configurações e mapeamento graphql | 
+| src/test | Diretório com os fontes e configurações de teste |
 
 ## Log ao iniciar a aplicação.
 
