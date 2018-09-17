@@ -1,0 +1,21 @@
+type Mutation {
+
+    # Criar categoria
+    createCategory(category: CategoryInput!): Category
+
+    # Editar categoria
+    editCategory(id: Int!, category: CategoryInput!): Category
+
+    # Remover categoria
+    deleteCategory(id: Int!): Boolean
+
+    # Criar produto
+    createProduct(product: ProductInput!): Product
+
+    # Editar produto
+    editProduct(id: Int!, product: ProductInput!): Product
+
+    # Remover produto
+    deleteProduct(id: Int!): Boolean
+}
+

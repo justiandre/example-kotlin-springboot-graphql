@@ -1,0 +1,15 @@
+type Query {
+
+    # Obter categoria por identificador
+    category(id: Int!): Category
+
+    # Obter categorias de maneira paginada
+    categories(pagination: Pagination): [Category!]
+
+    # Obter product por identificador
+    product(id: Int!): Product
+
+    # Obter produtos
+    products(pagination: Pagination, name: String): [Product!]
+}
+

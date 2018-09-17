@@ -1,0 +1,15 @@
+input Pagination {
+    page: Int
+    maxRecords: Int
+}
+
+input CategoryInput {
+    name: String!
+}
+
+input ProductInput {
+    name: String!
+    description: String
+    value: Float
+    categories: [Int!]
+}
