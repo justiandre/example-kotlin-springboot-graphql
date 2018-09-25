@@ -119,6 +119,11 @@ class CategoryIT : AbstractIT() {
         assertValidationExceptionCategoryNameMaxSize(createAndSaveCategory(), { categorySdk.editCategory(it) })
     }
 
+    @Test
+    fun `Search find all without informing pagination`() {
+        categorySdk.categories(Pagination())
+    }
+
     private fun findAllCategoryId(categoryId: Long) = categorySdk.categories(createPagination()).firstOrNull { it.id == categoryId }
 
     private fun assertDeleteCategory(searchCategory: (Long) -> Category?) {

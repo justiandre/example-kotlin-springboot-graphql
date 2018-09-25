@@ -65,8 +65,10 @@ class ProductService(
         addIfItemConditionIsTrueAndNotHasError({ StringUtils.length(product.name) > PRODUCT_NAME_MAX_SIZE }, ITEM_VALIDATION_LOCATION_PRODUCT_NAME, ITEM_VALIDATION_ERROR_PRODUCT_NAME_MAX_SIZE)
         addIfItemConditionIsTrueAndNotHasError({ isDuplicateProduct(product) }, ITEM_VALIDATION_LOCATION_PRODUCT_NAME, ITEM_VALIDATION_ERROR_PRODUCT_DUPLICATE)
         addIfItemConditionIsTrue(StringUtils.length(product.description) > PRODUCT_DESCRIPTION_MAX_SIZE, ITEM_VALIDATION_LOCATION_PRODUCT_DESCRIPTION, ITEM_VALIDATION_ERROR_PRODUCT_DESCRIPTION_MAX_SIZE)
-        addIfItemConditionIsTrue(product.value != null && product.value!! <= NumberUtils.DOUBLE_ZERO, ITEM_VALIDATION_LOCATION_PRODUCT_VALUE, ITEM_VALIDATION_ERROR_PRODUCT_VALUE_NOT_NEGATIVE)
         addIfItemConditionIsTrue(CollectionUtils.isEmpty(product.categories), ITEM_VALIDATION_LOCATION_PRODUCT_CATEGORY, ITEM_VALIDATION_ERROR_PRODUCT_CATEGORY_REQUIRED)
+        product.value?.apply {
+            addIfItemConditionIsTrue(this <= NumberUtils.DOUBLE_ZERO, ITEM_VALIDATION_LOCATION_PRODUCT_VALUE, ITEM_VALIDATION_ERROR_PRODUCT_VALUE_NOT_NEGATIVE)
+        }
     }.validate()
 
     fun isDuplicateProduct(product: Product) =

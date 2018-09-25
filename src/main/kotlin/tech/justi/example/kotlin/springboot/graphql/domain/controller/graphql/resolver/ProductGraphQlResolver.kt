@@ -29,13 +29,13 @@ class ProductGraphQlResolver(
                     name = productInput.name,
                     description = productInput.description,
                     value = productInput.value,
-                    categories = productInput.categories?.map { Category(id = it) }
+                    categories = productInput.categories.map { Category(id = it) }
             )
 
     object ProductInput {
         var name: String? = null
         var description: String? = null
         var value: Double? = null
-        var categories: List<Long>? = null
+        var categories: List<Long> = emptyList()
     }
 }

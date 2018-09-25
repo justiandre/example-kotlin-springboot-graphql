@@ -11,6 +11,7 @@ import tech.justi.example.kotlin.springboot.graphql.domain.entity.Product
 import tech.justi.example.kotlin.springboot.graphql.domain.sdk.CategorySdk
 import tech.justi.example.kotlin.springboot.graphql.domain.sdk.ProductSdk
 import tech.justi.example.kotlin.springboot.graphql.domain.service.ProductService
+import tech.justi.example.kotlin.springboot.graphql.infrastructure.dto.Pagination
 
 class ProductIT : AbstractIT() {
 
@@ -144,6 +145,11 @@ class ProductIT : AbstractIT() {
     @Test
     fun `Edit product checking validation - product category required`() {
         assertValidationExceptionProductCategoryRequired(createAndSaveProduct(), { productSdk.editProduct(it) })
+    }
+
+    @Test
+    fun `Search find all without informing pagination`() {
+        productSdk.products(Pagination(), StringUtils.EMPTY)
     }
 
     private fun findAllProductId(productId: Long) = productSdk.products(createPagination(), StringUtils.EMPTY).firstOrNull { it.id == productId }
